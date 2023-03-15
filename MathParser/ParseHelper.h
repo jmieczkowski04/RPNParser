@@ -2,13 +2,19 @@
 
 #include "Expression.h"
 
-enum class Operator
+enum class Operator : int
 {
-	None,
+	None = 0x0,
 	Add,
 	Sub,
 	Mul,
 	Div,
+	Pow,
+
+	_DoubleParam,
+
+	Sqrt
+
 };
 
 Operator GetOperator(std::string i);

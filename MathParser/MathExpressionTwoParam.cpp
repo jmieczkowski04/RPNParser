@@ -1,7 +1,8 @@
-#include "MathExpression.h"
+#include "MathExpressionTwoParam.h"
 
+#include <cmath>
 
-double MathExpression::GetValue()
+double MathExpressionTwoParam::GetValue()
 {
 	if (!(a && b))
 	{
@@ -22,13 +23,16 @@ double MathExpression::GetValue()
 	case Operator::Div:
 		Out = a->GetValue() / b->GetValue();
 		break;
+	case Operator::Pow:
+		Out = pow(a->GetValue(), b->GetValue());
+		break;
 	default:
 		break;
 	}
 	return Out;
 }
 
-void MathExpression::Parse(std::vector<std::string>& input)
+void MathExpressionTwoParam::Parse(std::vector<std::string>& input)
 {
 	op = GetOperator(input.back());
 	input.pop_back();
@@ -45,7 +49,7 @@ void MathExpression::Parse(std::vector<std::string>& input)
 	
 }
 
-MathExpression::~MathExpression()
+MathExpressionTwoParam::~MathExpressionTwoParam()
 {
 	if (a)
 		delete a;

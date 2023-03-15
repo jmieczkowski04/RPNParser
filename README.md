@@ -6,8 +6,12 @@
 
 `4 3 - 5 *` - `(4-3)*5`
 
-## Supported operators
+## Supported two argument operators
  - \+ addition
  - \- subtraction
  - \* multiplication
  - \\ division
+ - ^ exponentiation
+ 
+## Supported one argument operators
+ - sqrt square root
