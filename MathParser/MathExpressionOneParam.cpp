@@ -13,6 +13,9 @@ double MathExpressionOneParam::GetValue()
 	case Operator::Sqrt:
 		Out = sqrt(inner->GetValue());
 		break;
+	case Operator::Abs:
+		Out = abs(inner->GetValue());
+		break;
 	default:
 		Out = 1;
 		break;

@@ -13,7 +13,8 @@ enum class Operator : int
 
 	_DoubleParam,
 
-	Sqrt
+	Sqrt,
+	Abs,
 
 };
 

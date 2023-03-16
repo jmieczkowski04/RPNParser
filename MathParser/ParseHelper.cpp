@@ -3,6 +3,9 @@
 #include "MathExpressionTwoParam.h"
 #include "MathExpressionOneParam.h"
 
+#include <algorithm>
+#include <iostream>
+
 
 Expression* CreateExpression(std::vector<std::string>& input)
 {
@@ -30,9 +33,14 @@ Operator GetOperator(std::string i)
 
 	if (i.length() > 1)
 	{
+		std::transform(i.begin(), i.end(), i.begin(), tolower);
 		if (i == "sqrt")
 		{
 			op = Operator::Sqrt;
+		}
+		else if (i == "abs")
+		{
+			op = Operator::Abs;
 		}
 		return op;
 	}
