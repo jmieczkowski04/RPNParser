@@ -4,23 +4,30 @@
 #include "MathExpressionOneParam.h"
 
 #include <algorithm>
-#include <iostream>
 
 
 Expression* CreateExpression(std::vector<std::string>& input)
 {
 	Expression* Out = nullptr;
-	if (Operator op = GetOperator(input.back()); op != Operator::None)
+	std::string back = input.back();
+
+	if (Operator op = GetOperator(back); op != Operator::None)
 	{
 		if(op > Operator::_DoubleParam)
 			Out = new MathExpressionOneParam;
 		else
 			Out = new MathExpressionTwoParam;
 	}
-	else if (std::stod(input.back()))
+	else if (back == "PI")
 	{
 		Out = new ConstExpression;
 	}
+	else
+	{
+		//should check if number
+		Out = new ConstExpression;
+	}
+	
 	return Out;
 }
 
@@ -41,6 +48,14 @@ Operator GetOperator(std::string i)
 		else if (i == "abs")
 		{
 			op = Operator::Abs;
+		}
+		else if (i == "sin")
+		{
+			op = Operator::Sin;
+		}
+		else if (i == "cos")
+		{
+			op = Operator::Cos;
 		}
 		return op;
 	}

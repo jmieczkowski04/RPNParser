@@ -16,6 +16,12 @@ double MathExpressionOneParam::GetValue()
 	case Operator::Abs:
 		Out = abs(inner->GetValue());
 		break;
+	case Operator::Sin:
+		Out = sin(inner->GetValue());
+		break;
+	case Operator::Cos:
+		Out = cos(inner->GetValue());
+		break;
 	default:
 		Out = 1;
 		break;

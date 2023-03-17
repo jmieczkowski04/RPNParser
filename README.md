@@ -16,3 +16,5 @@
 ## Supported one argument operators
  - sqrt square root
  - abs absolute value
+ - sin
+ - cos

@@ -15,6 +15,8 @@ enum class Operator : int
 
 	Sqrt,
 	Abs,
+	Sin,
+	Cos,
 
 };
 
