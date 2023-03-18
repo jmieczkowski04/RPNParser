@@ -99,6 +99,6 @@ Operator GetOperator(std::string i)
 
 bool is_number(std::string& str)
 {	
-	static std::regex num("-?[0-9]+([\.][0-9]+)?");
+	static std::regex num("-?[0-9]+([.][0-9]+)?");
 	return std::regex_match(str, num);
 }
