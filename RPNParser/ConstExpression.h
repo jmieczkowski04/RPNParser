@@ -10,4 +10,6 @@ public:
 
 private:
 	double Value;
+	bool bSet = false;
+	friend Expression* CreateExpression(std::vector<std::string>& input);
 };

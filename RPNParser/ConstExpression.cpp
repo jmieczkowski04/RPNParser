@@ -11,6 +11,9 @@ double ConstExpression::GetValue()
 
 void ConstExpression::Parse(std::vector<std::string>& input)
 {
+	if (bSet)
+		return;
+	bSet = true;
 	std::string v = input.back();
 	input.pop_back();
 	if (v == "PI")

@@ -10,6 +10,15 @@
 Expression* CreateExpression(std::vector<std::string>& input)
 {
 	Expression* Out = nullptr;
+	if (!input.size())
+	{
+		ConstExpression* v = new ConstExpression;
+		Out = v;
+		v->Value = 0;
+		v->bSet = true;
+		return Out;
+	}
+
 	std::string back = input.back();
 
 	if (Operator op = GetOperator(back); op != Operator::None)
@@ -22,6 +31,14 @@ Expression* CreateExpression(std::vector<std::string>& input)
 	else if (back == "PI" || is_number(back))
 	{
 		Out = new ConstExpression;
+	}
+	else
+	{
+		ConstExpression* v = new ConstExpression;
+		Out = v;
+		v->Value = 0;
+		v->bSet = true;
+		return Out;
 	}
 	
 	return Out;
