@@ -5,6 +5,12 @@
 
 #include <algorithm>
 #include <regex>
+#include "xxhash.h"
+
+#define SQRT 0x1CAC55EAAF7B4466
+#define ABS 0x334A2BAA36EF2A93
+#define SIN 0xAE8218BE62EA760B
+#define COS 0x4AF0EE5D46AC31A4
 
 
 Expression* CreateExpression(std::vector<std::string>& input)
@@ -54,21 +60,24 @@ Operator GetOperator(std::string i)
 	if (i.length() > 1)
 	{
 		std::transform(i.begin(), i.end(), i.begin(), tolower);
-		if (i == "sqrt")
+		XXH64_hash_t hashedOperator = XXH3_64bits(i.c_str(), i.size());
+		switch (hashedOperator)
 		{
+		case SQRT: 
 			op = Operator::Sqrt;
-		}
-		else if (i == "abs")
-		{
+			break;
+		case ABS:
 			op = Operator::Abs;
-		}
-		else if (i == "sin")
-		{
+			break;
+		case SIN:
 			op = Operator::Sin;
-		}
-		else if (i == "cos")
-		{
+			break;
+		case COS:
 			op = Operator::Cos;
+			break;
+		default:
+			op = Operator::None;
+			break;
 		}
 		return op;
 	}

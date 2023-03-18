@@ -1,5 +1,8 @@
 # Reverse polish notation calculator
 
+## Requirements
+This program requires installed xxhash library. To install it use vcpkg.
+
 ## How does it translate to normal math?
 
 `2 5 +` - `2 + 5`
