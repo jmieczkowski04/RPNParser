@@ -24,6 +24,7 @@
     <ProjectGuid>{1b1bd356-7a28-4776-ac58-142a51fa22de}</ProjectGuid>
     <RootNamespace>MathParser</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>RPNParser</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -134,7 +135,7 @@
     <ClCompile Include="ConstExpression.cpp" />
     <ClCompile Include="MathExpressionOneParam.cpp" />
     <ClCompile Include="MathExpressionTwoParam.cpp" />
-    <ClCompile Include="MathParser.cpp" />
+    <ClCompile Include="RPNParser.cpp" />
     <ClCompile Include="ParseHelper.cpp" />
   </ItemGroup>
   <ItemGroup>

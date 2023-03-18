@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="MathParser.cpp">
+    <ClCompile Include="RPNParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ConstExpression.cpp">
