@@ -37,16 +37,26 @@ void MathExpressionTwoParam::Parse(std::vector<std::string>& input)
 	op = GetOperator(input.back());
 	input.pop_back();
 
-	b = CreateExpression(input);
-	if (!b)
+	Expression* first = CreateExpression(input);
+	if (!first)
 		return;
-	b->Parse(input);
+	first->Parse(input);
 
-	a = CreateExpression(input);
-	if (!a)
+	Expression* second = CreateExpression(input);
+	if (!second)
 		return;
-	a->Parse(input);
-	
+	second->Parse(input);
+
+	if (GReversedOrder)
+	{
+		b = first;
+		a = second;
+	}
+	else 
+	{
+		a = first;
+		b = second;
+	}
 }
 
 MathExpressionTwoParam::~MathExpressionTwoParam()

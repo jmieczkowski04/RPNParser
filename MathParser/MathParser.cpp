@@ -3,8 +3,12 @@
 #include <string>
 #include <sstream>
 #include <iomanip>
+#include <algorithm>
 
 #include "ParseHelper.h"
+
+bool GReversedOrder = true;
+
 
 int main()
 {
@@ -19,6 +23,11 @@ int main()
     while (std::getline(inputStream, element, ' '))
     {
         elements.push_back(element);
+    }
+
+    if (!GReversedOrder)
+    {
+        std::reverse(elements.begin(), elements.end());
     }
 
     /* we should check if there is no invalid chars, but:

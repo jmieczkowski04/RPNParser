@@ -2,6 +2,8 @@
 
 #include "Expression.h"
 
+extern bool GReversedOrder;
+
 enum class Operator : int
 {
 	None = 0x0,
