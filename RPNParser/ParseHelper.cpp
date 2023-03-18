@@ -4,6 +4,7 @@
 #include "MathExpressionOneParam.h"
 
 #include <algorithm>
+#include <regex>
 
 
 Expression* CreateExpression(std::vector<std::string>& input)
@@ -82,4 +83,9 @@ Operator GetOperator(std::string i)
 		op = Operator::None;
 	}
 	return op;
+}
+
+bool is_number(std::string& str)
+{	
+	return std::regex_match(str, std::regex("-?[0-9]+([\.][0-9]+)?"));
 }

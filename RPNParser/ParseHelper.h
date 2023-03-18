@@ -25,3 +25,5 @@ enum class Operator : int
 Operator GetOperator(std::string i);
 
 Expression* CreateExpression(std::vector<std::string>& input);
+
+bool is_number(std::string& str);
