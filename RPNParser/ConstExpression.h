@@ -5,7 +5,7 @@
 class ConstExpression : public Expression
 {
 public: 
-	double GetValue() override;
+	double GetValue() const override;
 	virtual void Parse(std::vector<std::string>& input) override;
 
 private:

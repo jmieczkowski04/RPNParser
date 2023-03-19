@@ -7,7 +7,7 @@
 class MathExpressionOneParam : public Expression
 {
 public:
-	virtual double GetValue() override;
+	virtual double GetValue() const override;
 	virtual void Parse(std::vector<std::string>& input) override;
 	~MathExpressionOneParam();
 private:

@@ -2,7 +2,7 @@
 
 #include <cmath>
 
-double MathExpressionTwoParam::GetValue()
+double MathExpressionTwoParam::GetValue() const
 {
 	if (!(a && b))
 	{

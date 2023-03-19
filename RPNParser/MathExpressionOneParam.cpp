@@ -1,6 +1,6 @@
 #include "MathExpressionOneParam.h"
 
-double MathExpressionOneParam::GetValue()
+double MathExpressionOneParam::GetValue() const
 {
 	if (!inner)
 	{

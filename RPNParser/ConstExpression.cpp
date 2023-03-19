@@ -3,7 +3,7 @@
 
 #include "ParseHelper.h"
 
-double ConstExpression::GetValue()
+double ConstExpression::GetValue() const
 {
 	return Value;
 }
