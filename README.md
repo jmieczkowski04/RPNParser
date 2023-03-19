@@ -21,6 +21,11 @@ This program requires installed xxhash library. To install it use vcpkg.
  - abs absolute value
  - sin
  - cos
+
+## Supported constants
+ - `PI` PI number (3.14..)
+ - `e` Euler's number (2.71...)
+ Each constant has 100 digits after `.`. This is more than enought to fully fill `double` C++ type(64-bit precision).
  
 ## Support for polish notation
 RPNParser also supports normal polish notation. To enable that pass `--pn` command line argument. Parsing speed will not be affected, but there is some setup before calling parser, so it will take a little bit longer to execute it. 
