@@ -23,7 +23,7 @@ This program requires installed xxhash library. To install it use vcpkg.
  - cos
 
 ## Supported constants
- - `PI` PI number (3.14..)
+ - `PI` PI number (3.14...)
  - `e` Euler's number (2.71...)
  Each constant has 100 digits after `.`. This is more than enought to fully fill `double` C++ type(64-bit precision).
  
