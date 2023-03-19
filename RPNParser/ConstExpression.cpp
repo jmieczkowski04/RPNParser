@@ -1,8 +1,7 @@
 #include "ConstExpression.h"
 #include <string>
 
-
-#define PI 3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679
+#include "ParseHelper.h"
 
 double ConstExpression::GetValue()
 {
@@ -16,8 +15,8 @@ void ConstExpression::Parse(std::vector<std::string>& input)
 	bSet = true;
 	std::string v = input.back();
 	input.pop_back();
-	if (v == "PI")
-		Value = PI;
+	if (is_constant(v))
+		Value = get_constant(v);
 	else
 		Value = std::stod(v);
 }

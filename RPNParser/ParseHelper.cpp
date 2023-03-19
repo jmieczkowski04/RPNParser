@@ -7,11 +7,18 @@
 #include <regex>
 #include "xxhash.h"
 
+//xxhashed functions
 #define SQRT 0x1CAC55EAAF7B4466
 #define ABS 0x334A2BAA36EF2A93
 #define SIN 0xAE8218BE62EA760B
 #define COS 0x4AF0EE5D46AC31A4
 
+//xxhashed constants
+#define PI 0xD2E3A8A90A0D1151
+
+
+//values of constants
+#define PI_VALUE 3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679
 
 Expression* CreateExpression(std::vector<std::string>& input)
 {
@@ -34,7 +41,7 @@ Expression* CreateExpression(std::vector<std::string>& input)
 		else
 			Out = new MathExpressionTwoParam;
 	}
-	else if (back == "PI" || is_number(back))
+	else if (is_constant(back) || is_number(back))
 	{
 		Out = new ConstExpression;
 	}
@@ -110,4 +117,36 @@ bool is_number(std::string& str)
 {	
 	static std::regex num("-?[0-9]+([.][0-9]+)?");
 	return std::regex_match(str, num);
+}
+
+bool is_constant(std::string& str)
+{
+	bool Out = true;
+	XXH64_hash_t hashedString = XXH3_64bits(str.c_str(), str.size());
+
+	switch (hashedString)
+	{
+	case PI:
+		break;
+	default:
+		Out = false;
+		break;
+	}
+	return Out;
+}
+
+double get_constant(std::string& str)
+{
+	double Out = 0;
+	XXH64_hash_t hashedString = XXH3_64bits(str.c_str(), str.size());
+
+	switch (hashedString)
+	{
+	case PI:
+		Out = PI_VALUE;
+		break;
+	default:
+		break;
+	}
+	return Out;
 }

@@ -27,3 +27,7 @@ Operator GetOperator(std::string i);
 Expression* CreateExpression(std::vector<std::string>& input);
 
 bool is_number(std::string& str);
+
+bool is_constant(std::string& str);
+
+double get_constant(std::string& str);
