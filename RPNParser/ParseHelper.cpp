@@ -8,17 +8,19 @@
 #include "xxhash.h"
 
 //xxhashed functions
-#define SQRT 0x1CAC55EAAF7B4466
-#define ABS 0x334A2BAA36EF2A93
-#define SIN 0xAE8218BE62EA760B
-#define COS 0x4AF0EE5D46AC31A4
+#define SQRT	0x1CAC55EAAF7B4466
+#define ABS		0x334A2BAA36EF2A93
+#define SIN		0xAE8218BE62EA760B
+#define COS		0x4AF0EE5D46AC31A4
 
 //xxhashed constants
-#define PI 0xD2E3A8A90A0D1151
+#define PI	0xD2E3A8A90A0D1151
+#define E	0xE5E72E5E3BEC4A78
 
 
 //values of constants
-#define PI_VALUE 3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679
+#define PI_VALUE	3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679
+#define E_VALUE		2.7182818284590452353602874713526624977572470936999595749669676277240766303535475945713821785251664274
 
 Expression* CreateExpression(std::vector<std::string>& input)
 {
@@ -127,6 +129,7 @@ bool is_constant(std::string& str)
 	switch (hashedString)
 	{
 	case PI:
+	case E:
 		break;
 	default:
 		Out = false;
@@ -144,6 +147,9 @@ double get_constant(std::string& str)
 	{
 	case PI:
 		Out = PI_VALUE;
+		break;
+	case E:
+		Out = E_VALUE;
 		break;
 	default:
 		break;
