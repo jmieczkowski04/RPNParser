@@ -30,6 +30,12 @@
     <ClCompile Include="MathExpressionOneParam.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="VarExpression.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FunctionExpression.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Expression.h">
@@ -47,5 +53,16 @@
     <ClInclude Include="MathExpressionOneParam.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="VarExpression.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FunctionExpression.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Constants.inl">
+      <Filter>Header Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

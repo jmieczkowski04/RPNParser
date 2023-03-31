@@ -133,17 +133,24 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ConstExpression.cpp" />
+    <ClCompile Include="FunctionExpression.cpp" />
     <ClCompile Include="MathExpressionOneParam.cpp" />
     <ClCompile Include="MathExpressionTwoParam.cpp" />
     <ClCompile Include="RPNParser.cpp" />
     <ClCompile Include="ParseHelper.cpp" />
+    <ClCompile Include="VarExpression.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConstExpression.h" />
     <ClInclude Include="Expression.h" />
+    <ClInclude Include="FunctionExpression.h" />
     <ClInclude Include="MathExpressionOneParam.h" />
     <ClInclude Include="MathExpressionTwoParam.h" />
     <ClInclude Include="ParseHelper.h" />
+    <ClInclude Include="VarExpression.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Constants.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -2,7 +2,13 @@
 
 #include "Expression.h"
 
+#include <map>
+#include <stack>
+
 extern bool GReversedOrder;
+extern bool GParsingFunction;
+extern std::map<std::string, Expression*> GFunctionStore;
+extern std::stack<double> GContextStack;
 
 enum class Operator : int
 {

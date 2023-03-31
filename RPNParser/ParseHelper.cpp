@@ -2,25 +2,18 @@
 #include "ConstExpression.h"
 #include "MathExpressionTwoParam.h"
 #include "MathExpressionOneParam.h"
+#include "VarExpression.h"
+#include "FunctionExpression.h"
 
 #include <algorithm>
 #include <regex>
 #include "xxhash.h"
 
-//xxhashed functions
-#define SQRT	0x1CAC55EAAF7B4466
-#define ABS		0x334A2BAA36EF2A93
-#define SIN		0xAE8218BE62EA760B
-#define COS		0x4AF0EE5D46AC31A4
+#include "Constants.inl"
 
-//xxhashed constants
-#define PI	0xD2E3A8A90A0D1151
-#define E	0xE5E72E5E3BEC4A78
+std::map<std::string, Expression*> GFunctionStore;
+std::stack<double> GContextStack;
 
-
-//values of constants
-#define PI_VALUE	3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679
-#define E_VALUE		2.7182818284590452353602874713526624977572470936999595749669676277240766303535475945713821785251664274
 
 Expression* CreateExpression(std::vector<std::string>& input)
 {
@@ -46,6 +39,14 @@ Expression* CreateExpression(std::vector<std::string>& input)
 	else if (is_constant(back) || is_number(back))
 	{
 		Out = new ConstExpression;
+	}
+	else if (GFunctionStore.contains(back))
+	{
+		Out = new FunctionExpression;
+	}
+	else if (back == "x" && GParsingFunction)
+	{
+		Out = new VarExpression;
 	}
 	else
 	{
