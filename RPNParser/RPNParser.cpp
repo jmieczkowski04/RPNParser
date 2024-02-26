@@ -7,9 +7,11 @@
 
 #include "ParseHelper.h"
 
+#define PROMPT_CHAR "> "
+
 bool GReversedOrder = true;
 bool GParsingFunction = false;
-std::string SwitchNotation(std::string& notation);
+char* SwitchNotation(char* notation);
 void SplitString(std::string& input, std::vector<std::string>& out);
 
 int main(int argc, char** argv)
@@ -18,12 +20,12 @@ int main(int argc, char** argv)
         if (!strcmp(argv[i], "--pn"))
             GReversedOrder = false;
 
-    std::string notation;
+    char notation[8];
     SwitchNotation(notation);
 
-    std::string promptChar = "> ";
+    std::string promptChar = PROMPT_CHAR;
 
-    std::cout << "RPNParser. Parsing using " << notation << " Polish notation. To end type \'exit\'. To switch notation type \'switch\'. To define a function type \'def <name>\'. Variable name is x.\n" << promptChar;
+    std::cout << "RPNParser. Parsing using " << notation << " Polish notation. To end type \'exit\'. To switch notation type \'switch\'. To define a function type \'def <name>\'. Variable name is x.\n";
 
     std::vector<std::string> elements;
     std::string input;
@@ -33,7 +35,13 @@ int main(int argc, char** argv)
 
     do
     {
-        std::getline(std::cin, input);
+        do
+        {
+            std::cout << promptChar;
+            std::getline(std::cin, input);
+        } 
+        while (input == "");
+            
         elements.clear();
 
         SplitString(input, elements);
@@ -43,14 +51,14 @@ int main(int argc, char** argv)
         if (command == "switch")
         {
             GReversedOrder = !GReversedOrder;
-            std::cout << "Switched notation from " << notation << " to " << SwitchNotation(notation) << "\n" << promptChar;
+            std::cout << "Switched notation from " << notation << " to " << SwitchNotation(notation) << "\n";
             continue;
         }
         else if (command == "def" && elements.size() == 2)
         {
             GParsingFunction = true;
             functionName = elements[1];
-            std::cout << functionName << "(x) " << promptChar;
+            promptChar = functionName + "(x) " + promptChar;
             continue;
         }
         else if (command == "exit")
@@ -72,18 +80,18 @@ int main(int argc, char** argv)
                 GParsingFunction = false;
                 GFunctionStore.insert(std::pair<std::string, Expression*>(functionName, exp));
                 functionName = "";
-                std::cout << promptChar;
+                promptChar = PROMPT_CHAR;
             }
             else 
             {
-                std::cout << exp->GetValue() << "\n" << promptChar;
+                std::cout << exp->GetValue() << "\n";
                 delete exp;
             }
             
         }
         else
         {
-            std::cout << "Failed to parse\n" << promptChar;
+            std::cout << "Failed to parse\n";
         }
 
     } while (command != "exit");
@@ -95,9 +103,18 @@ int main(int argc, char** argv)
 
 }
 
-std::string SwitchNotation(std::string& notation)
+char* SwitchNotation(char* notation)
 {
-    notation = GReversedOrder ? "Reverse" : "Normal";
+    char reversed[] = "Reverse";
+    char normal[] = "Normal";
+    if (GReversedOrder)
+    {
+        strcpy_s(notation, 8, reversed);
+    }
+    else 
+    {
+        strcpy_s(notation, 8, normal);
+    }
     return notation;
 }
 
