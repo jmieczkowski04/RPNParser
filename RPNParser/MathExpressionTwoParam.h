@@ -12,9 +12,7 @@ public:
 	virtual void Parse(std::vector<std::string>& input) override;
 	~MathExpressionTwoParam();
 private:
-	Expression* a;
-	Expression* b;
-	Operator op;
-
-
+	Expression* a = nullptr;
+	Expression* b = nullptr;
+	Operator op = Operator::None;
 };

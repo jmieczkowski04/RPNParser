@@ -12,6 +12,6 @@ public:
 	~FunctionExpression();
 private:
 	std::string name;
-	Expression* ctx;
-	Operator op;
+	Expression* ctx = nullptr;
+	Operator op = Operator::None;
 };

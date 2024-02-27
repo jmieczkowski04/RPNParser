@@ -10,5 +10,5 @@ public:
 	virtual double GetValue() const override;
 	virtual void Parse(std::vector<std::string>& input) override;
 private:
-	Operator op;
+	Operator op = Operator::None;
 };

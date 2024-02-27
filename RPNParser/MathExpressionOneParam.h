@@ -11,6 +11,6 @@ public:
 	virtual void Parse(std::vector<std::string>& input) override;
 	~MathExpressionOneParam();
 private:
-	Expression* inner;
-	Operator op;
+	Expression* inner = nullptr;
+	Operator op = Operator::None;
 };
