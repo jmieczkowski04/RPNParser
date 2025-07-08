@@ -4,6 +4,7 @@
 #include <sstream>
 #include <iomanip>
 #include <algorithm>
+#include <string.h>
 
 #include "ParseHelper.h"
 
@@ -11,16 +12,16 @@
 
 bool GReversedOrder = true;
 bool GParsingFunction = false;
-char* SwitchNotation(char* notation);
-void SplitString(std::string& input, std::vector<std::string>& out);
+std::string SwitchNotation(std::string &notation);
+void SplitString(std::string &input, std::vector<std::string> &out);
 
-int main(int argc, char** argv)
+int main(int argc, char **argv)
 {
     for (int i = 1; i < argc; i++)
         if (!strcmp(argv[i], "--pn"))
             GReversedOrder = false;
 
-    char notation[8];
+    std::string notation;
     SwitchNotation(notation);
 
     std::string promptChar = PROMPT_CHAR;
@@ -39,9 +40,8 @@ int main(int argc, char** argv)
         {
             std::cout << promptChar;
             std::getline(std::cin, input);
-        } 
-        while (input == "");
-            
+        } while (input == "");
+
         elements.clear();
 
         SplitString(input, elements);
@@ -64,30 +64,27 @@ int main(int argc, char** argv)
         else if (command == "exit")
             continue;
 
-
         if (!GReversedOrder)
         {
             std::reverse(elements.begin(), elements.end());
         }
 
-
-        Expression* exp = CreateExpression(elements);
+        Expression *exp = CreateExpression(elements);
         if (exp)
         {
             exp->Parse(elements);
             if (GParsingFunction)
             {
                 GParsingFunction = false;
-                GFunctionStore.insert(std::pair<std::string, Expression*>(functionName, exp));
+                GFunctionStore.insert(std::pair<std::string, Expression *>(functionName, exp));
                 functionName = "";
                 promptChar = PROMPT_CHAR;
             }
-            else 
+            else
             {
                 std::cout << exp->GetValue() << "\n";
                 delete exp;
             }
-            
         }
         else
         {
@@ -96,29 +93,28 @@ int main(int argc, char** argv)
 
     } while (command != "exit");
 
-    for (auto& e : GFunctionStore)
+    for (auto &e : GFunctionStore)
     {
         delete e.second;
     }
-
 }
 
-char* SwitchNotation(char* notation)
+std::string SwitchNotation(std::string &notation)
 {
-    char reversed[] = "Reverse";
-    char normal[] = "Normal";
+    std::string reversed = "Reverse";
+    std::string normal = "Normal";
     if (GReversedOrder)
     {
-        strcpy_s(notation, 8, reversed);
+        notation = reversed;
     }
-    else 
+    else
     {
-        strcpy_s(notation, 8, normal);
+        notation = normal;
     }
     return notation;
 }
 
-void SplitString(std::string& input, std::vector<std::string>& out)
+void SplitString(std::string &input, std::vector<std::string> &out)
 {
     std::string element;
     std::istringstream inputStream(input);

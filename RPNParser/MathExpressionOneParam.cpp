@@ -1,4 +1,5 @@
 #include "MathExpressionOneParam.h"
+#include <cmath>
 
 double MathExpressionOneParam::GetValue() const
 {
@@ -7,20 +8,20 @@ double MathExpressionOneParam::GetValue() const
 		return 0;
 	}
 	double Out;
-	
+
 	switch (op)
 	{
 	case Operator::Sqrt:
-		Out = sqrt(inner->GetValue());
+		Out = std::sqrt(inner->GetValue());
 		break;
 	case Operator::Abs:
-		Out = abs(inner->GetValue());
+		Out = std::abs(inner->GetValue());
 		break;
 	case Operator::Sin:
-		Out = sin(inner->GetValue());
+		Out = std::sin(inner->GetValue());
 		break;
 	case Operator::Cos:
-		Out = cos(inner->GetValue());
+		Out = std::cos(inner->GetValue());
 		break;
 	default:
 		Out = 1;
@@ -30,7 +31,7 @@ double MathExpressionOneParam::GetValue() const
 	return Out;
 }
 
-void MathExpressionOneParam::Parse(std::vector<std::string>& input)
+void MathExpressionOneParam::Parse(std::vector<std::string> &input)
 {
 	op = GetOperator(input.back());
 	input.pop_back();
@@ -39,7 +40,6 @@ void MathExpressionOneParam::Parse(std::vector<std::string>& input)
 	if (!inner)
 		return;
 	inner->Parse(input);
-
 }
 
 MathExpressionOneParam::~MathExpressionOneParam()

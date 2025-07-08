@@ -1,7 +1,7 @@
 # Reverse polish notation calculator
 
 ## Requirements
-This program requires installed xxhash library. To install it use vcpkg.
+This program requires installed xxhash library. It must me avalible from pkg-config.
 
 ## How does it translate to normal math?
 
