@@ -2,13 +2,15 @@
 
 #include "Expression.h"
 
-#include <map>
+#include <unordered_map>
 #include <stack>
 #include <memory>
 
+using function_store = std::unordered_map<std::string, std::shared_ptr<Expression>>;
+
 extern bool GReversedOrder;
 extern bool GParsingFunction;
-extern std::map<std::string, std::shared_ptr<Expression>> GFunctionStore;
+extern function_store GFunctionStore;
 extern std::stack<double> GContextStack;
 
 enum class Operator : int

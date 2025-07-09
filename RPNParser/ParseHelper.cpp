@@ -12,7 +12,7 @@
 
 #include "Constants.inl"
 
-std::map<std::string, std::shared_ptr<Expression>> GFunctionStore;
+function_store GFunctionStore;
 std::stack<double> GContextStack;
 
 std::unique_ptr<Expression> CreateExpression(std::vector<std::string> &input)
