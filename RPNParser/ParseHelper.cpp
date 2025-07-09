@@ -6,24 +6,24 @@
 #include "FunctionExpression.h"
 
 #include <algorithm>
+#include <numbers>
 #include <regex>
 #include "xxhash.h"
 
 #include "Constants.inl"
 
-std::map<std::string, Expression*> GFunctionStore;
+std::map<std::string, std::shared_ptr<Expression>> GFunctionStore;
 std::stack<double> GContextStack;
 
-
-Expression* CreateExpression(std::vector<std::string>& input)
+std::unique_ptr<Expression> CreateExpression(std::vector<std::string> &input)
 {
-	Expression* Out = nullptr;
+	std::unique_ptr<Expression> Out = nullptr;
 	if (!input.size())
 	{
-		ConstExpression* v = new ConstExpression;
-		Out = v;
+		ConstExpression *v = new ConstExpression;
 		v->Value = 0;
 		v->bSet = true;
+		Out.reset(v);
 		return Out;
 	}
 
@@ -32,31 +32,31 @@ Expression* CreateExpression(std::vector<std::string>& input)
 	if (Operator op = GetOperator(back); op != Operator::None)
 	{
 		if (op > Operator::_DoubleParam)
-			Out = new MathExpressionOneParam;	
+			Out.reset(new MathExpressionOneParam);
 		else
-			Out = new MathExpressionTwoParam;
+			Out.reset(new MathExpressionTwoParam);
 	}
 	else if (is_constant(back) || is_number(back))
 	{
-		Out = new ConstExpression;
+		Out.reset(new ConstExpression);
 	}
 	else if (GFunctionStore.contains(back))
 	{
-		Out = new FunctionExpression;
+		Out.reset(new FunctionExpression);
 	}
 	else if (back == "x" && GParsingFunction)
 	{
-		Out = new VarExpression;
+		Out.reset(new VarExpression);
 	}
 	else
 	{
-		ConstExpression* v = new ConstExpression;
-		Out = v;
+		ConstExpression *v = new ConstExpression;
 		v->Value = 0;
 		v->bSet = true;
+		Out.reset(v);
 		return Out;
 	}
-	
+
 	return Out;
 }
 
@@ -73,7 +73,7 @@ Operator GetOperator(std::string i)
 		XXH64_hash_t hashedOperator = XXH3_64bits(i.c_str(), i.size());
 		switch (hashedOperator)
 		{
-		case SQRT: 
+		case SQRT:
 			op = Operator::Sqrt;
 			break;
 		case ABS:
@@ -116,13 +116,13 @@ Operator GetOperator(std::string i)
 	return op;
 }
 
-bool is_number(std::string& str)
-{	
+bool is_number(std::string &str)
+{
 	static std::regex num("-?[0-9]+([.][0-9]+)?");
 	return std::regex_match(str, num);
 }
 
-bool is_constant(std::string& str)
+bool is_constant(std::string &str)
 {
 	bool Out = true;
 	XXH64_hash_t hashedString = XXH3_64bits(str.c_str(), str.size());
@@ -139,7 +139,7 @@ bool is_constant(std::string& str)
 	return Out;
 }
 
-double get_constant(std::string& str)
+double get_constant(std::string &str)
 {
 	double Out = 0;
 	XXH64_hash_t hashedString = XXH3_64bits(str.c_str(), str.size());
@@ -147,10 +147,10 @@ double get_constant(std::string& str)
 	switch (hashedString)
 	{
 	case PI:
-		Out = PI_VALUE;
+		Out = std::numbers::pi;
 		break;
 	case E:
-		Out = E_VALUE;
+		Out = std::numbers::e;
 		break;
 	default:
 		break;

@@ -1,15 +1,16 @@
 #pragma once
 
 #include "Expression.h"
+#include <memory>
 
 class ConstExpression : public Expression
 {
-public: 
+public:
 	double GetValue() const override;
-	virtual void Parse(std::vector<std::string>& input) override;
+	virtual void Parse(std::vector<std::string> &input) override;
 
 private:
 	double Value;
 	bool bSet = false;
-	friend Expression* CreateExpression(std::vector<std::string>& input);
+	friend std::unique_ptr<Expression> CreateExpression(std::vector<std::string> &input);
 };

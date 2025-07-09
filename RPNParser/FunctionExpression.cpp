@@ -2,7 +2,7 @@
 
 double FunctionExpression::GetValue() const
 {
-    if(!ctx || name.empty() || !GFunctionStore.contains(name))
+    if (!ctx || name.empty() || !GFunctionStore.contains(name))
         return 0.0;
     GContextStack.push(ctx->GetValue());
     double Out = GFunctionStore[name]->GetValue();
@@ -10,17 +10,12 @@ double FunctionExpression::GetValue() const
     return Out;
 }
 
-void FunctionExpression::Parse(std::vector<std::string>& input)
+void FunctionExpression::Parse(std::vector<std::string> &input)
 {
     name = input.back();
     input.pop_back();
-    ctx = CreateExpression(input);
+    ctx = std::move(CreateExpression(input));
     if (!ctx)
         return;
     ctx->Parse(input);
-}
-
-FunctionExpression::~FunctionExpression()
-{
-    delete ctx;
 }

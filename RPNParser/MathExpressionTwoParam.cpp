@@ -32,7 +32,7 @@ double MathExpressionTwoParam::GetValue() const
 	return Out;
 }
 
-void MathExpressionTwoParam::Parse(std::vector<std::string>& input)
+void MathExpressionTwoParam::Parse(std::vector<std::string> &input)
 {
 	op = GetOperator(input.back());
 	input.pop_back();
@@ -55,9 +55,4 @@ void MathExpressionTwoParam::Parse(std::vector<std::string>& input)
 
 MathExpressionTwoParam::~MathExpressionTwoParam()
 {
-	if (a)
-		delete a;
-	if (b)
-		delete b;
 }
-

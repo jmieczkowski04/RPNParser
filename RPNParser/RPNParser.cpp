@@ -69,21 +69,20 @@ int main(int argc, char **argv)
             std::reverse(elements.begin(), elements.end());
         }
 
-        Expression *exp = CreateExpression(elements);
+        std::unique_ptr<Expression> exp = CreateExpression(elements);
         if (exp)
         {
             exp->Parse(elements);
             if (GParsingFunction)
             {
                 GParsingFunction = false;
-                GFunctionStore.insert(std::pair<std::string, Expression *>(functionName, exp));
+                GFunctionStore.insert(std::pair<std::string, std::shared_ptr<Expression>>(functionName, std::move(exp)));
                 functionName = "";
                 promptChar = PROMPT_CHAR;
             }
             else
             {
                 std::cout << exp->GetValue() << "\n";
-                delete exp;
             }
         }
         else
@@ -92,11 +91,6 @@ int main(int argc, char **argv)
         }
 
     } while (command != "exit");
-
-    for (auto &e : GFunctionStore)
-    {
-        delete e.second;
-    }
 }
 
 std::string SwitchNotation(std::string &notation)

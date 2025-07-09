@@ -4,10 +4,11 @@
 
 #include <map>
 #include <stack>
+#include <memory>
 
 extern bool GReversedOrder;
 extern bool GParsingFunction;
-extern std::map<std::string, Expression*> GFunctionStore;
+extern std::map<std::string, std::shared_ptr<Expression>> GFunctionStore;
 extern std::stack<double> GContextStack;
 
 enum class Operator : int
@@ -30,10 +31,10 @@ enum class Operator : int
 
 Operator GetOperator(std::string i);
 
-Expression* CreateExpression(std::vector<std::string>& input);
+std::unique_ptr<Expression> CreateExpression(std::vector<std::string> &input);
 
-bool is_number(std::string& str);
+bool is_number(std::string &str);
 
-bool is_constant(std::string& str);
+bool is_constant(std::string &str);
 
-double get_constant(std::string& str);
+double get_constant(std::string &str);

@@ -2,16 +2,16 @@
 
 #include "Expression.h"
 #include "ParseHelper.h"
-
+#include <memory>
 
 class FunctionExpression : public Expression
 {
 public:
 	virtual double GetValue() const override;
-	virtual void Parse(std::vector<std::string>& input) override;
-	~FunctionExpression();
+	virtual void Parse(std::vector<std::string> &input) override;
+
 private:
 	std::string name;
-	Expression* ctx = nullptr;
+	std::unique_ptr<Expression> ctx = nullptr;
 	Operator op = Operator::None;
 };

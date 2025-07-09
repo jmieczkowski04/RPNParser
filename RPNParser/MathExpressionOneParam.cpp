@@ -44,6 +44,4 @@ void MathExpressionOneParam::Parse(std::vector<std::string> &input)
 
 MathExpressionOneParam::~MathExpressionOneParam()
 {
-	if (inner)
-		delete inner;
 }
